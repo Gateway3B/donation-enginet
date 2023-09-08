@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    command: ["postgres", "-c", "log_statement=all"]
+    ports:
+      - 5432:5432
+    restart: always
+    env_file:
+      - ./.env
+    volumes:
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local

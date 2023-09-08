@@ -1,0 +1,10 @@
+{
+    "scripts": {
+        "start:leptos": "cargo leptos watch",
+        "start:tailwind:": ".\\tailwindcss -i ./input.css -o ./style/output.css --watch",
+        "start:postgres": "docker compose -f docker-compose.dev.yaml up",
+        "install": "cargo install cargo-leptos && cargo install sea-orm-cli",
+        "db:reset": "docker compose -f docker-compose.dev.yaml down --volumes",
+        "db:shell": "docker exec -it donation-engine-db-1 psql -d donationengine -U donationengineserveruser"
+    }
+}
