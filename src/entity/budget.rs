@@ -12,9 +12,6 @@ pub struct Model {
     pub total_value: Decimal,
     pub donation_percent: Decimal,
     pub value_override: Option<Decimal>,
-
-    #[sea_orm(ignore)]
-    pub donation_value: u32,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

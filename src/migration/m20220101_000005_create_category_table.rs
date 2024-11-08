@@ -12,9 +12,10 @@ pub enum Category {
     Id,
     ListId,
     Name,
-    ValueMultiplier,
+    Multiplier,
     PercentOverride,
     ValueOverride,
+    Enabled,
 }
 
 #[async_trait::async_trait]
@@ -42,13 +43,14 @@ impl MigrationTrait for Migration {
                     )
                     .col(ColumnDef::new(Category::Name).string().not_null())
                     .col(
-                        ColumnDef::new(Category::ValueMultiplier)
+                        ColumnDef::new(Category::Multiplier)
                             .decimal()
                             .default(Decimal::ONE)
                             .not_null(),
                     )
                     .col(ColumnDef::new(Category::PercentOverride).decimal().null())
                     .col(ColumnDef::new(Category::ValueOverride).decimal().null())
+                    .col(ColumnDef::new(Category::Enabled).boolean().not_null())
                     .to_owned(),
             )
             .await

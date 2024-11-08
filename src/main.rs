@@ -1,3 +1,4 @@
+pub mod clerk_middleware;
 pub mod database;
 pub mod entity;
 pub mod migration;
@@ -7,7 +8,8 @@ pub mod migration;
 async fn main() -> std::io::Result<()> {
     use actix_files::Files;
     use actix_web::*;
-    use clerk_rs::{validators::actix::ClerkMiddleware, ClerkConfiguration};
+    use clerk_middleware::ClerkMiddleware;
+    use clerk_rs::ClerkConfiguration;
     use database::*;
     use leptos::*;
     use leptos_actix::{generate_route_list, LeptosRoutes};
@@ -31,7 +33,7 @@ async fn main() -> std::io::Result<()> {
         let clerk_config = ClerkConfiguration::new(None, None, Some(clerk_secret_key), None);
 
         App::new()
-            .app_data(db.clone())
+            .app_data(web::Data::new(db.clone()))
             .service(
                 web::resource("/api/{tail:.*}")
                     .route(leptos_actix::handle_server_fns())

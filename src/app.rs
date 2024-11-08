@@ -10,9 +10,12 @@ use clerk::*;
 use engine::*;
 use home::*;
 
+use crate::list::List;
+
 #[derive(Clone)]
 struct AppState {
     clerk: RwSignal<Option<Clerk>>,
+    list: RwSignal<Option<List>>,
 }
 
 #[component]
@@ -24,6 +27,7 @@ pub fn App(cx: Scope) -> impl IntoView {
         cx,
         AppState {
             clerk: create_rw_signal(cx, None),
+            list: create_rw_signal(cx, None),
         },
     );
 
@@ -39,7 +43,7 @@ pub fn App(cx: Scope) -> impl IntoView {
         <ion-app>
             <Header/>
 
-            <ion-content>
+            <ion-content class="no-scrollbar">
                 <Router>
 
                     // Load Clerk
@@ -48,7 +52,7 @@ pub fn App(cx: Scope) -> impl IntoView {
                     <main>
                         <Routes>
                             <Route path="/" view=HomePage/>
-                                <Route path="engine" view=EnginePage/>
+                            <Route path="engine" view=EnginePage/>
                             <Route path="/*any" view=NotFound/>
                         </Routes>
                     </main>

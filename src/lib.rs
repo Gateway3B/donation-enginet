@@ -1,6 +1,10 @@
 pub mod app;
-// pub mod entity;
+pub mod list;
 use cfg_if::cfg_if;
+
+cfg_if! { if #[cfg(feature = "ssr")] {
+  pub mod entity;
+}}
 
 cfg_if! {
 if #[cfg(feature = "hydrate")] {

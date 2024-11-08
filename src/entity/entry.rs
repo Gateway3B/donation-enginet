@@ -11,24 +11,26 @@ pub struct Model {
     pub ein: i32,
 
     #[sea_orm(default_value = "Decimal::ONE")]
-    pub value_multiplier: Decimal,
+    pub multiplier: Decimal,
     pub percent_override: Option<Decimal>,
     pub value_override: Option<Decimal>,
+
+    pub enabled: bool,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
     #[sea_orm(
-        belongs_to = "super::list::Entity",
+        belongs_to = "super::category::Entity",
         from = "Column::CategoryId",
-        to = "super::list::Column::Id"
+        to = "super::category::Column::Id"
     )]
-    List,
+    Category,
 }
 
-impl Related<super::list::Entity> for Entity {
+impl Related<super::category::Entity> for Entity {
     fn to() -> RelationDef {
-        Relation::List.def()
+        Relation::Category.def()
     }
 }
 

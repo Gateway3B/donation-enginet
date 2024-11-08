@@ -1,4 +1,5 @@
 use crate::migration::Migrator;
+
 use sea_orm::{
     ConnectOptions, ConnectionTrait, Database, DatabaseConnection, DbBackend, Statement,
 };

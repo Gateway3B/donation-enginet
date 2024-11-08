@@ -35,7 +35,7 @@ pub async fn is_logged_in(cx: Scope, session_id: String) -> Result<bool, ServerF
     .await
 }
 
-#[derive(Clone, Serialize, Deserialize, Debug)]
+#[derive(Clone, Serialize, Deserialize, Debug, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct Clerk {
     pub client: ClientResource,
@@ -43,21 +43,23 @@ pub struct Clerk {
     pub user: Option<UserResource>,
 }
 
-#[derive(Clone, Serialize, Deserialize, Debug)]
+#[derive(Clone, Serialize, Deserialize, Debug, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct ClientResource {
     pub path_root: String,
 }
 
-#[derive(Clone, Serialize, Deserialize, Debug)]
+#[derive(Clone, Serialize, Deserialize, Debug, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct ActiveSessionResource {
     pub id: String,
 }
 
-#[derive(Clone, Serialize, Deserialize, Debug)]
+#[derive(Clone, Serialize, Deserialize, Debug, PartialEq)]
 #[serde(rename_all = "camelCase")]
-pub struct UserResource {}
+pub struct UserResource {
+    pub id: String,
+}
 
 use wasm_bindgen::JsValue;
 #[wasm_bindgen(js_namespace = ["window", "Clerk"])]

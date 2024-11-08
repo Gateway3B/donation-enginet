@@ -17,3 +17,4 @@ tailwindcss.exe
 migration/target/*
 .env
 style/output.css
+.idea/
